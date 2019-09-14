@@ -1,0 +1,94 @@
+@import "./_functions.scss";
+@import "./_variables.scss";
+@import "./_breakpoints.scss";
+
+$height: 50px;
+$duration: 0.20s;
+
+
+#Navibar {
+	z-index: 7;
+	position: fixed;
+	top: 0;
+
+	width: 100%;
+  height: $height;
+
+	padding: 0;
+  box-sizing: border-box;
+
+	font-size: 1.5rem;
+
+	transition: background-color 0.30s ease 0s;
+
+	@include media-breakpoint-only(xs) {
+		background-color: black;
+	}
+}
+
+html:not([data-scroll="0"]) {
+	#Navibar {
+		background-color: rgba(0,0,0, 0.80);
+
+		@include media-breakpoint-only(xs) {
+			background-color: black;
+		}
+	}
+}
+
+#basic-navbar-nav {
+	@include media-breakpoint-only(xs) {
+		background-color: black;
+		border-bottom: 1px solid grey;
+	}
+}
+
+.toggle-button {
+	margin-right: 1rem;
+}
+
+.brand {
+	height: $height;
+	margin: 0 2rem;
+
+	@include media-breakpoint-only(xs) {
+		margin: 0 0 0 1rem;
+	}
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background-color: #E50A12;
+
+  transform: scaleX(0);
+  transition: transform $duration ease;
+}
+
+a.nav-link,
+div.nav-link {
+	position: relative;
+	cursor: pointer;
+
+	margin: 0 50px;
+	padding: 2px 1px;
+	text-align: center;
+
+	color: white;
+	transition: color $duration ease 0s;
+
+	&:hover {
+		color: #E50A12;
+		.bottom { transform: scaleX(1); }
+	}
+
+	@include media-breakpoint-only(xs) {
+		margin: 0 5px;
+		border-top: 1px solid grey;
+	}
+}
