@@ -28,7 +28,7 @@ $duration: 0.20s;
 
 html:not([data-scroll="0"]) {
 	#Navibar {
-		background-color: rgba(0,0,0, 0.80);
+		background-color: rgba(0,0,0, 0.90);
 
 		@include media-breakpoint-only(xs) {
 			background-color: black;
@@ -91,4 +91,8 @@ div.nav-link {
 		margin: 0 5px;
 		border-top: 1px solid grey;
 	}
+}
+
+.logout {
+	margin-left: auto !important;
 }

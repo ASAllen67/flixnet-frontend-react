@@ -1,8 +1,6 @@
 let initialState = {
-  // id: null,
-  // friends: [],
-  // messages: [],
-  // sent_messages: []
+  seen_ids: [],
+  backlog_ids: []
 }
 
 export default (state = initialState, action) => {
@@ -15,19 +13,6 @@ export default (state = initialState, action) => {
       let newArr = state.sent_messages.slice()
       newArr.push(action.message)
       return {...state, sent_messages: newArr }
-    }
-
-    case 'NEW_EVENT': {
-      let newArr = state.events.slice()
-      newArr.push(action.event)
-      return {...state, events: newArr }
-    }
-
-    case 'MESSAGE_SEEN': {
-      let messages = state.messages
-      messages.find(msg => msg.id === action.message_id).seen = true
-
-      return {...state, messages }
     }
 
     default: { return state }

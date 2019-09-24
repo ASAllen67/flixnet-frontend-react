@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Login from './views/Login'
 import Navibar from './components/Navibar'
 import Search from './views/Search'
+import MovieTracker from './views/MovieTracker'
 // {/**/}
 
 
@@ -17,14 +18,17 @@ function Routes(props) {
 		)
 	}
 	return (
-		<div id="Routes">
+		<Fragment>
 			<Navibar/>
-
-			<Switch>
-				<Route exact path='/search' component={Search} />
-				<Redirect to="/search" />
-			</Switch>
-		</div>
+			
+			<div id="Routes">
+				<Switch>
+					<Route exact path='/search' component={Search} />
+					<Route exact path='/tracker' component={MovieTracker} />
+					<Redirect to="/search" />
+				</Switch>
+			</div>
+		</Fragment>
 	)
 }
 

@@ -7,6 +7,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
 
     case 'LOG_IN': {
+      // token is set in localStorage in the Login.js component
       return {...state, loggedIn: true }
     }
 

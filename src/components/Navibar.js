@@ -16,7 +16,6 @@ const debounce = (func, delay) => {
 }
 
 const storeScroll = () => {
-	console.log("storing scrollY")
   document.documentElement.dataset.scroll = window.scrollY;
 }
 
@@ -39,7 +38,12 @@ class Navibar extends React.Component {
 						<span className="bottom"></span>
 					</Link>
 
-					<div className="nav-link" onClick={()=> this.props.dispatch({ type: "LOG_OUT" })}>
+					<Link to="/tracker" className="nav-link">
+						Movie&nbsp;Tracker
+						<span className="bottom"></span>
+					</Link>
+
+					<div className="nav-link logout" onClick={()=> this.props.dispatch({ type: "LOG_OUT" })}>
 						 Logout
 						<span className="bottom"></span>
 					</div>
@@ -49,5 +53,4 @@ class Navibar extends React.Component {
 	}
 }
 
-// let mapStateToProps = state => ({ loggedIn: state.session.loggedIn })
 export default connect()(Navibar)
