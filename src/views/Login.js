@@ -39,12 +39,14 @@ class Login extends React.Component {
 
 	handleLogin = e => {
 		e.preventDefault()
+
+		let form = e.target
 		let credentials = {
-			username: this.state.public_key.encrypt(e.target.username.value),
-			password: this.state.public_key.encrypt(e.target.password.value),
+			username: this.state.public_key.encrypt(form.username.value),
+			password: this.state.public_key.encrypt(form.password.value),
 		}
 
-		fetch(`${rails_api}/login`, {
+		fetch(`${rails_api}/sessions`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -55,6 +57,7 @@ class Login extends React.Component {
 		.then(res => res.json())
 		.then(res => {
 			if (res.error) {
+				form.password.value = ""
 				this.setState({ error: res.error })
 			}
 			else if (res.token) {
@@ -81,13 +84,16 @@ class Login extends React.Component {
 
 				<div className="pl-form-container">
 					<h1 className="pl-heading">Log In</h1>
+
 					{ this.state.error && <p className="pl-error">{this.state.error}</p> }
+
 					<form className="pl-form" onSubmit={this.handleLogin}>
 						<input className="pl-input top" required type="text" name="username" placeholder="Username" /><br/>
 						<input className="pl-input" required type="password" name="password" placeholder="Password" />
 						<button className="pl-button red-btn" type="submit">Log In</button>
 					</form>
-					<Link to="/signup" className="pl-redirect-text">Don't have an account yet?</Link>
+
+					<Link to="/signup" className="pl-redirect">Don't have an account yet?</Link>
 				</div>
 			</div>
 		)
