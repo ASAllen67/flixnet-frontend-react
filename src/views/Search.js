@@ -14,6 +14,7 @@ class Search extends React.Component {
     page: 1,
     lastPage: 1,
   	results: null,
+    total_results: null,
     showModal: false
   }
 
@@ -25,7 +26,8 @@ class Search extends React.Component {
         query: query,
         page: res.page,
         lastPage: res.total_pages,
-        results: res.results
+        results: res.results,
+        total_results: res.total_results
       })
     })
   }
@@ -54,20 +56,22 @@ class Search extends React.Component {
   				</div>
 
           <button
-            className="results-page-button"
+            className="results-page-button inverted-red-btn"
             disabled={this.state.page === 1}
             onClick={()=> this.searchTMDB(this.state.page - 1) }>
             Previous
           </button>
 
           <button
-            className="results-page-button"
+            className="results-page-button inverted-red-btn"
             disabled={this.state.page === this.state.lastPage}
             onClick={()=> this.searchTMDB(this.state.page + 1) }>
             Next
           </button>
 
-          <div className="page-text">Page {this.state.page} of {this.state.lastPage}</div>
+          <div className="page-text">
+            Page {this.state.page} of {this.state.lastPage} ({this.state.total_results} results)
+          </div>
         </Fragment>
 			)
   }

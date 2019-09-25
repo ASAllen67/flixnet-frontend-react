@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Navbar } from 'react-bootstrap'
-import flixnet_banner from '../images/flixnet_banner3.png'
+import flixnet_logo from '../images/flixnet_logo.png'
 import '../stylesheets/Navibar.scss'
 
 const debounce = (func, delay) => { 
@@ -29,7 +29,7 @@ class Navibar extends React.Component {
 	render() {
 		return (
 	    <Navbar id="Navibar" expand="md">
-	      <img className="brand" draggable="false" src={flixnet_banner} alt="banner"/>
+	      <img className="brand" draggable="false" src={flixnet_logo} alt="banner"/>
 
 	      <Navbar.Toggle variant="light" aria-controls="basic-navbar-nav" className="bg-dark toggle-button"/>
 	      <Navbar.Collapse id="basic-navbar-nav">

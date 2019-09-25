@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  background-color: darkgrey;
 }
 
 .App-logo {
@@ -21,12 +21,6 @@
 
 .App-link {
   color: #61dafb;
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
 }
 
 @keyframes App-logo-spin {

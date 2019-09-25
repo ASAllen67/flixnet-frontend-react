@@ -1,0 +1,46 @@
+#App {
+  background-color: darkgrey;
+}
+
+.red-btn {
+	color: white;
+  background-color: #E50A12;
+  border: 2px solid #E50A12;
+	border-radius: 4px;
+
+	&:hover {
+		border-color: white;
+	}
+	&:active {
+		color: #E50A12;
+		background-color: white;
+		border-color: white;
+	}
+	&:focus {
+		outline: none;
+	}
+	&:disabled {
+		border-color: #E50A12;
+	}
+}
+
+.inverted-red-btn {
+  background-color: white;
+  border: 2px solid white;
+	border-radius: 4px;
+
+	&:hover {
+		border-color: #E50A12;
+	}
+	&:active {
+		color: white;
+		background-color: #E50A12;
+		border-color: #E50A12;
+	}
+	&:focus {
+		outline: none;
+	}
+	&:disabled {
+		border-color: white;
+	}
+}

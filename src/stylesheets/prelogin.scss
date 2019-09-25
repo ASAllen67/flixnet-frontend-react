@@ -1,0 +1,115 @@
+@import "./_functions.scss";
+@import "./_variables.scss";
+@import "./_breakpoints.scss";
+
+
+.pl-page {
+	min-height: 100vh;
+	min-width: 100vw;
+
+	background: linear-gradient(
+		rgba(0, 0, 0, 0.50), 
+		rgba(0, 0, 0, 0.50) 
+	), url("../images/netflix_bg.jpeg");
+
+	@include media-breakpoint-only(xs) {
+		background: black;
+	}
+}
+
+.pl-logo {
+	margin: 20px 20px 0;
+	height: 70px;
+
+	@include media-breakpoint-only(xs) {
+		margin: 5px 5px 0;
+		height: 45px;
+	}
+}
+
+.pl-heading {
+	margin-bottom: 30px;
+	text-align: left;
+
+	color: white;
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.pl-form-container {
+	margin: auto;
+	text-align: center;
+
+	width: 450px;
+	// height: 70vh;
+	max-width: 100vw;
+	padding: 60px 70px 40px;
+
+	background-color: rgba(0,0,0, 0.75);
+	border-radius: 4px;
+
+	@include media-breakpoint-only(xs) {
+		padding: 15px;
+		background: black;
+		// height: 80vh;
+	}
+}
+
+.pl-form {
+	width: 100%;
+	margin-bottom: 50px;
+}
+
+
+.pl-input {
+	width: 100%;
+	height: 50px;
+	margin-top: 15px;
+	padding: 5px 15px;
+
+	font-size: 1rem;
+
+	outline: none;
+	color: white;
+	background-color: #333;
+	border: 2px solid #333;
+	box-sizing: border-box;
+	border-radius: 4px;
+
+
+	&:focus {
+		border-color: grey;
+		background-color: #454545;
+	}
+}
+
+.top {
+	margin-top: 0;
+}
+
+.pl-button {
+	width: 100%;
+	height: 50px;
+	margin-top: 45px;
+	font-weight: bold;
+}
+
+.pl-error {
+	margin: 10px;
+	color: #E50A12;
+	font-size: 1.1rem;
+}
+
+.pl-loading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	min-height: 100vh;
+	height: 100%;
+
+	font-size: 1.4rem;
+	color: white;
+	background-color: black;
+}

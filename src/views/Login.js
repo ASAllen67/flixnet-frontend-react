@@ -1,15 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import ReactLoading from 'react-loading'
 import JSEncrypt from 'jsencrypt'
-import flixnet_banner from '../images/flixnet_banner2.jpeg'
+import flixnet_logo from '../images/flixnet_logo.png'
 import { rails_api } from '../constants'
-import '../stylesheets/Login.scss'
+import '../stylesheets/prelogin.scss'
 
 
 class Login extends React.Component {
 
 	state = {
+		loading: false,
 		public_key: null,
 		error: null
 	}
@@ -25,10 +27,14 @@ class Login extends React.Component {
 			if (res.public_key) {
 				let lock = new JSEncrypt()
 				lock.setPublicKey(res.public_key)
-				this.setState({ public_key: lock })
+				this.setState({ loading: false, public_key: lock })
 			}
 		})
-		.catch(error => setTimeout(this.fetchPublicKey, 5000))
+		.catch(error => {
+			setTimeout(this.fetchPublicKey, 5000)
+			if (!this.state.loading)
+				this.setState({ loading: true })
+		})
 	}
 
 	handleLogin = e => {
@@ -59,10 +65,10 @@ class Login extends React.Component {
 	}
 
 	render() {
-		
-		if (!this.state.public_key) {
+
+		if (this.state.loading) {
 			return (
-				<div className="login-loading">
+				<div className="pl-loading">
 					<ReactLoading type="bars" color="#E50A12" height="20%" width="20%" />
 					<div>Waking up Heroku database</div>
 				</div>
@@ -70,16 +76,19 @@ class Login extends React.Component {
 		}
 
 		return (
-			<div id="Login">
-				<img draggable="false" className="login-banner" src={flixnet_banner} alt="banner" />
-				{ this.state.error && <div className="login-error">{this.state.error}</div> }
-				<form className="login-form" onSubmit={this.handleLogin}>
-					<input className="login-input top" required type="text" name="username" placeholder="Username" />
-					<br/>
-					<input className="login-input" required type="password" name="password" placeholder="Password" />
-					<br/>
-					<button className="login-button" type="submit">Sign In</button>
-				</form>
+			<div id="Login" className="pl-page">
+				<img className="pl-logo" src={flixnet_logo} draggable="false" alt="FlixNet Logo" />
+
+				<div className="pl-form-container">
+					<h1 className="pl-heading">Log In</h1>
+					{ this.state.error && <p className="pl-error">{this.state.error}</p> }
+					<form className="pl-form" onSubmit={this.handleLogin}>
+						<input className="pl-input top" required type="text" name="username" placeholder="Username" /><br/>
+						<input className="pl-input" required type="password" name="password" placeholder="Password" />
+						<button className="pl-button red-btn" type="submit">Log In</button>
+					</form>
+					<Link to="/signup" className="pl-redirect-text">Don't have an account yet?</Link>
+				</div>
 			</div>
 		)
 	}

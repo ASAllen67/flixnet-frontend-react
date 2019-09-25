@@ -1,15 +1,40 @@
 import React from 'react'
-import './stylesheets/App.css'
-import './stylesheets/button.scss'
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux'
+import Login from './views/Login'
+import Signup from './views/Signup'
+import Navibar from './components/Navibar'
+import Search from './views/Search'
+import MovieTracker from './views/MovieTracker'
+import './stylesheets/App.scss'
 
-import Routes from './Routes'
-
-function App() {
-  return (
-    <div id="App">
-    	<Routes/>
-    </div>
-  );
+class App extends React.Component {
+	render() {
+		if (!this.props.loggedIn) {
+				return (
+				<div id="App">
+					<Switch>
+						<Route exact path='/login' component={Login} />
+						<Route exact path='/signup' component={Signup} />
+						<Redirect to="/login" />
+					</Switch>
+				</div>
+			)
+		}
+		else {
+			return (
+				<div id="App">
+					<Navibar/>
+					<Switch>
+						<Route exact path='/search' component={Search} />
+						<Route exact path='/tracker' component={MovieTracker} />
+						<Redirect to="/search" />
+					</Switch>
+				</div>
+			)
+		}
+	}
 }
 
-export default App;
+let mapStateToProps = state => ({ loggedIn: state.session.loggedIn })
+export default connect(mapStateToProps)(App)

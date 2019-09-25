@@ -1,13 +1,12 @@
 const initialState = {
-  loggedIn: !!localStorage.token,
-  errors: {}
+  loggedIn: !!localStorage.token
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
 
     case 'LOG_IN': {
-      // token is set in localStorage in the Login.js component
+      // token is put into localStorage in the Login.js component
       return {...state, loggedIn: true }
     }
 
