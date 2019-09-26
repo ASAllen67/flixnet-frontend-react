@@ -50,7 +50,7 @@ class Search extends React.Component {
     			<div className="search-results">
     				{ results.map(m => 
               <div key={m.id} onClick={()=> this.setState({showModal: m}) }>
-                <MovieCard movie={m}/>
+                <MovieCard movie={m} seen={true} backlogged={true} favorited={true}/>
               </div>
             )}
   				</div>

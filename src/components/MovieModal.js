@@ -35,7 +35,6 @@ export default function MovieModal (props) {
 		</Fragment>
 	}
 
-
 	return (
 		<Modal className="movie-modal" isOpen={true}>
 			<div className="mm-close-div"><IoIosCloseCircleOutline className="mm-close" onClick={props.closeModal}/></div>
