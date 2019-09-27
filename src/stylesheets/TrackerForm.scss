@@ -1,0 +1,61 @@
+@import "./_functions.scss";
+@import "./_variables.scss";
+@import "./_breakpoints.scss";
+
+
+.tf-toggle {
+	height: 30px;
+
+	@include media-breakpoint-only(md) {
+		display: block;
+	}
+
+	@include media-breakpoint-only(sm) {
+		display: block;
+	}
+
+	@include media-breakpoint-only(xs) {
+		display: block;
+	}
+}
+
+.tf-container {
+	text-align: left;
+	width: 90%;
+	margin: auto;
+}
+
+.tracker-form {
+	display: inline-block;
+}
+
+.tf-submit {
+	width: 70px;
+	height: 30px;
+}
+
+.tf-select {
+	text-align: center;
+	height: 30px;
+	color: #000;
+	background-color: #fff;
+}
+
+.tf-item-container {
+	display: inline-block;
+	
+	@include media-breakpoint-only(md) {
+		margin: 10px 0;
+		display: block;
+	}
+	
+	@include media-breakpoint-only(sm) {
+		margin: 10px 0;
+		display: block;
+	}
+
+	@include media-breakpoint-only(xs) {
+		margin: 10px 0;
+		display: block;
+	}
+}

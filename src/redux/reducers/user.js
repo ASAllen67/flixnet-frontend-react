@@ -1,18 +1,14 @@
-let initialState = {
-  seen_ids: [],
-  backlog_ids: []
+const initialState = {
+  completed_entries: [],
+  backlog_entries: [],
+  favorites: []
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
 
-    case 'SET_USER':
+    case 'SET_USER': {
       return {...action.user }
-
-    case 'MESSAGE_SENT': {
-      let newArr = state.sent_messages.slice()
-      newArr.push(action.message)
-      return {...state, sent_messages: newArr }
     }
 
     default: { return state }

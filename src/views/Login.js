@@ -63,6 +63,7 @@ class Login extends React.Component {
 			else if (res.token) {
 				localStorage.setItem("token", res.token)
 				this.props.dispatch({ type: "LOG_IN" })
+				this.props.dispatch({ type: "SET_USER", user: res.user })
 			}
 		})
 	}

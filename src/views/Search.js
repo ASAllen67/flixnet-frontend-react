@@ -3,19 +3,22 @@ import { connect } from 'react-redux'
 import { FaSearch } from 'react-icons/fa'
 import { tmdb_key } from '../keys'
 import MovieCard from '../components/MovieCard'
-import MovieModal from '../components/MovieModal'
+import SearchModal from '../components/SearchModal'
 import '../stylesheets/Search.scss'
 
 
 class Search extends React.Component {
 
   state = {
+    showModal: false,
+
     query: null,
+
     page: 1,
     lastPage: 1,
+
   	results: null,
-    total_results: null,
-    showModal: false
+    total_results: null
   }
 
   searchTMDB = (pageNum=1, query=this.state.query ) => {
@@ -39,6 +42,7 @@ class Search extends React.Component {
 
   renderResults = ()=> {
   	let results = this.state.results
+    let user = this.props.user
 
   	if(results === null)
   		return <div className="empty-search-text">Let's find some movies to watch!</div>
@@ -48,11 +52,23 @@ class Search extends React.Component {
   		return (
         <Fragment>
     			<div className="search-results">
-    				{ results.map(m => 
-              <div key={m.id} onClick={()=> this.setState({showModal: m}) }>
-                <MovieCard movie={m} seen={true} backlogged={true} favorited={true}/>
-              </div>
-            )}
+    				{ results.map(m => {
+
+              let seen = user.completed_ids.includes(m.id)
+              let backlogged = user.backlog_ids.includes(m.id)
+              let favorited = user.favorite_ids.includes(m.id)
+
+              return (
+                <div key={m.id} onClick={()=> this.setState({ showModal: { m, seen, backlogged, favorited } }) }>
+                  <MovieCard
+                    movie={m} 
+                    seen={seen} 
+                    backlogged={backlogged} 
+                    favorited={favorited}
+                  />
+                </div>
+              )
+            })}
   				</div>
 
           <button
@@ -76,6 +92,15 @@ class Search extends React.Component {
 			)
   }
 
+  renderModal = ()=> {
+    if (this.state.showModal) {
+      let modal = this.state.showModal
+      return <SearchModal movie={modal.m} closeModal={this.closeModal} seen={modal.seen} backlogged={modal.backlogged} favorited={modal.favorited}/>
+    }
+    else
+      return null
+  }
+
   closeModal = ()=> {
     if (this.state.showModal)
       this.setState({ showModal: false })
@@ -84,10 +109,10 @@ class Search extends React.Component {
 	render() {
 	  return (
 	   <div id="Search">
-      { this.state.showModal && <MovieModal movie={this.state.showModal} closeModal={this.closeModal}/> }
+      { this.renderModal() }
 
 	   	<form className="search-form" onSubmit={this.handleSubmit}>
-	    	<input required className="search-input" name="query" type="search"/>
+	    	<input required className="search-input" name="query" type="search" placeholder="Search"/>
 	    	<button className="search-button" type="submit"><FaSearch/></button>
 	    </form>
 
@@ -97,5 +122,5 @@ class Search extends React.Component {
 	}
 }
 
-let mapStateToProps = state => ({ seen_ids: state.user.seen_ids, backlog_ids: state.user.backlog_ids })
+let mapStateToProps = state => ({ user: state.user })
 export default connect(mapStateToProps)(Search)
