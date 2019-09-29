@@ -59,7 +59,7 @@ class Search extends React.Component {
               let favorited = user.favorite_ids.includes(m.id)
 
               return (
-                <div key={m.id} onClick={()=> this.setState({ showModal: { m, seen, backlogged, favorited } }) }>
+                <div key={m.id} onClick={()=> this.setState({ showModal: m }) }>
                   <MovieCard
                     movie={m} 
                     seen={seen} 
@@ -94,8 +94,7 @@ class Search extends React.Component {
 
   renderModal = ()=> {
     if (this.state.showModal) {
-      let modal = this.state.showModal
-      return <SearchModal movie={modal.m} closeModal={this.closeModal} seen={modal.seen} backlogged={modal.backlogged} favorited={modal.favorited}/>
+      return <SearchModal movie={this.state.showModal} closeModal={this.closeModal}/>
     }
     else
       return null

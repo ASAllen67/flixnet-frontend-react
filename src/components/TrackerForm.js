@@ -72,8 +72,6 @@ class TrackerForm extends React.Component {
 			type = "ADD_BACKLOG_ENTRY"
 		}
 
-		this.props.dispatch({ type, entry })
-
 		fetch(url, {
 			method: "POST",
 			headers: {
@@ -85,7 +83,9 @@ class TrackerForm extends React.Component {
 		})
 		.then(res => res.json())
 		.then(res => {
-			console.log(res)
+			if (res.entry) {
+				this.props.dispatch({ type, entry: res.entry })
+			}
 		})
 	}
 

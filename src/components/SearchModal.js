@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import TrackerForm from './TrackerForm'
+import { FaRegCheckCircle } from 'react-icons/fa'
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 import { TMDB_genres, months } from '../constants'
 import '../stylesheets/SearchModal.scss'
@@ -11,10 +12,12 @@ class SearchModal extends React.Component {
 	state = {}
 
 	showForm = ()=> {
-		if (this.props.seen)
-			return <button disabled>You've seen this movie.</button>
-		if (this.props.backlogged)
-			return <button disabled>This movie is backlogged. Did you finish it?</button>
+		if (this.props.user.completed_ids.includes(this.props.movie.id))
+			return <div>You've seen this movie. <FaRegCheckCircle className="svg-up green"/></div>
+
+		if (this.props.user.backlog_ids.includes(this.props.movie.id))
+			return <div>You have backlogged this movie.</div>
+
 		else
 			return <TrackerForm movie={this.props.movie}/>
 	}
@@ -65,4 +68,5 @@ class SearchModal extends React.Component {
 	}
 }
 
-export default connect()(SearchModal)
+let mapStateToProps = state => ({ user: state.user })
+export default connect(mapStateToProps)(SearchModal)

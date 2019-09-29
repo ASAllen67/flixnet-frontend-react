@@ -13,7 +13,7 @@ $duration: 0.20s;
 	text-align: center;
 }
 
-.mt-count {
+.mt-heading {
 	font-family: Helvetica;
 	margin-bottom: 20px;
 }
@@ -57,7 +57,7 @@ $duration: 0.20s;
 	}
 }
 
-.mt-active {
+.mt-active-item {
 	color: #E50A12;
 	.mt-bottom { transform: scaleX(1); }
 }
@@ -92,9 +92,20 @@ table.mt-table {
 	}
 }
 
-.mt-heart, .mt-delete {
+.mt-heart {
+	transform: scale(2.6);
+	color: #E50A12;
+}
+
+.mt-heart-click {
 	cursor: pointer;
 	transform: scale(2);
+	&:hover { color: #E50A12; }
+}
+
+.mt-delete {
+	cursor: pointer;
+	transform: scale(2.4);
 	&:hover { color: #E50A12; }
 }
 
