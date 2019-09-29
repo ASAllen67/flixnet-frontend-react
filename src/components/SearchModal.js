@@ -13,7 +13,7 @@ class SearchModal extends React.Component {
 
 	showForm = ()=> {
 		if (this.props.user.completed_ids.includes(this.props.movie.id))
-			return <div>You've seen this movie. <FaRegCheckCircle className="svg-up green"/></div>
+			return <div>You've seen this movie. <FaRegCheckCircle className="svg-align green"/></div>
 
 		if (this.props.user.backlog_ids.includes(this.props.movie.id))
 			return <div>You have backlogged this movie.</div>

@@ -34,7 +34,6 @@ export default (state = initialState, action) => {
     }
 
     case "ADD_COMPLETED_ENTRY": {
-      console.log('adding new completed...')
       let completed_entries = state.completed_entries.slice()
       let completed_ids = state.completed_ids.slice()
 

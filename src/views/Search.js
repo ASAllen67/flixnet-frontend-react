@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { FaSearch } from 'react-icons/fa'
-import { tmdb_key } from '../keys'
+// import { tmdb_key } from '../keys'
 import MovieCard from '../components/MovieCard'
 import SearchModal from '../components/SearchModal'
+import { rails_api } from '../constants'
 import '../stylesheets/Search.scss'
 
 
@@ -21,8 +22,29 @@ class Search extends React.Component {
     total_results: null
   }
 
+  // searchTMDB = (pageNum=1, query=this.state.query ) => {
+  //   fetch(`https://api.themoviedb.org/3/search/movie?api_key=${tmdb_key}&query=${query}&language=en-US&page=${pageNum}&include_adult=false`)
+  //   .then(res => res.json())
+  //   .then(res => {
+  //     this.setState({ 
+  //       query: query,
+  //       page: res.page,
+  //       lastPage: res.total_pages,
+  //       results: res.results,
+  //       total_results: res.total_results
+  //     })
+  //   })
+  // }
+
   searchTMDB = (pageNum=1, query=this.state.query ) => {
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${tmdb_key}&query=${query}&language=en-US&page=${pageNum}&include_adult=false`)
+    fetch(`${rails_api}/tmdb-search`,  {
+      method: "POST",
+      headers: { Authorization: `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({ query, pageNum })
+    })
     .then(res => res.json())
     .then(res => {
       this.setState({ 

@@ -10,9 +10,9 @@ export default function MovieCard (props) {
 
 	let topDiv = 
 	<div className="mc-status">
-		{ props.seen && <span className="mc-svg eye" data-tip="You've seen this one before"><FaEye/></span> }
-		{ props.backlogged && <span className="mc-svg backlog" data-tip="This movie is in your Backlog"><FaRegListAlt/></span> }
-		{ props.favorited && <span className="mc-svg heart" data-tip="Favorited"><GiCrownedHeart/></span> }
+		{ props.seen && <span data-tip="You've seen this one before"><FaEye className="mc-svg eye svg-align"/></span> }
+		{ props.backlogged && <span data-tip="This movie is in your Backlog"><FaRegListAlt className="mc-svg backlog svg-align"/></span> }
+		{ props.favorited && <span data-tip="Favorited"><GiCrownedHeart className="mc-svg heart svg-align"/></span> }
 		<ReactTooltip/>
 	</div>
 

@@ -1,3 +1,4 @@
+// export const rails_api = "https://flixnet-asallen.herokuapp.com"
 export const rails_api = "http://localhost:3000"
 
 export const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
