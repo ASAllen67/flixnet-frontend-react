@@ -17,8 +17,11 @@ class TrackerForm extends React.Component {
 
 		hideSubmit: true
 	}
-
 	baseState = this.state
+
+	componentDidUpdate() {
+	  this.bottom.scrollIntoView({ behavior: "smooth" })
+	}
 
 	toggleTrackerForm = ()=> {
 		if (this.state.hidden)
@@ -41,9 +44,8 @@ class TrackerForm extends React.Component {
 	}
 
 	checkScore = e => {
-		let score = e.target
-		if (score.value)
-			this.setState({ score: score.value, hideSubmit: false })
+		if (e.target.value)
+			this.setState({ score: e.target.value, hideSubmit: false })
 	}
 
 	handleSubmit = e => {
@@ -76,7 +78,7 @@ class TrackerForm extends React.Component {
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${localStorage.token}`,
-				"Content-type": "application/json",
+				"Content-Type": "application/json",
 				Accept: "application/json"
 			},
 			body: JSON.stringify({ entry })
@@ -122,6 +124,8 @@ class TrackerForm extends React.Component {
 						<button className="tf-submit red-btn" type="submit">Add</button>
 					</div>
 				</form>
+
+				<div ref={here => this.bottom = here}></div>
 			</div>
 		)
 	}

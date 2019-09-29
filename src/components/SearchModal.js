@@ -9,7 +9,13 @@ import '../stylesheets/SearchModal.scss'
 
 class SearchModal extends React.Component {
 
-	state = {}
+	componentDidMount() {
+		document.body.style.overflow = "hidden"   
+	}
+
+	componentWillUnmount() {
+		document.body.style.overflow = "unset"
+	}
 
 	showForm = ()=> {
 		if (this.props.user.completed_ids.includes(this.props.movie.id))
@@ -62,7 +68,7 @@ class SearchModal extends React.Component {
 				{    genres    }
 				{   overview   }
 				<br/>
-				{ this.showForm() } 
+				{ this.showForm() }
 			</Modal>
 		)
 	}
