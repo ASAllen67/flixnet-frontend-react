@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { FaRegCheckCircle } from 'react-icons/fa'
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 import poster_placeholder from '../images/poster_placeholder.jpeg'
-import { rails_api } from '../constants'
+import { backend_api } from '../constants'
 
 
 class BacklogTable extends React.Component {
 
 	createCompletedEntry = entry => {
-		fetch(`${rails_api}/completed_entries`, {
+		fetch(`${backend_api}/completed_entries`, {
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${localStorage.token}`,
@@ -30,7 +30,7 @@ class BacklogTable extends React.Component {
 	deleteEntry = (id, tmdb_id) => {
 		this.props.dispatch({ type: "DELETE_BACKLOG_ENTRY", id, tmdb_id })
 		
-		fetch(`${rails_api}/backlog_entries/${id}`, {
+		fetch(`${backend_api}/backlog_entries/${id}`, {
 			method: "DELETE",
 			headers: { Authorization: `Bearer ${localStorage.token}` }
 		})

@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { FaHeartBroken } from 'react-icons/fa'
 import poster_placeholder from '../images/poster_placeholder.jpeg'
-import { rails_api } from '../constants'
+import { backend_api } from '../constants'
 
 class FavoriteTable extends React.Component {
 
 	deleteFavorite = (id, tmdb_id) => {
 		this.props.dispatch({ type: "DELETE_FAVORITE", id, tmdb_id })
 
-		fetch(`${rails_api}/favorites/${id}`, {
+		fetch(`${backend_api}/favorites/${id}`, {
 			method: "DELETE",
 			headers: { Authorization: `Bearer ${localStorage.token}` }
 		})

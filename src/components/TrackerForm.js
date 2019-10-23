@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { IoIosArrowForward } from 'react-icons/io'
-import { rails_api } from '../constants'
+import { backend_api } from '../constants'
 import '../stylesheets/TrackerForm.scss'
 
 
@@ -62,7 +62,7 @@ class TrackerForm extends React.Component {
 			tmdb_id: m.id
 		}
 
-		let url = rails_api
+		let url = backend_api
 		let type
 
 		if (this.state.status === "Completed") {

@@ -36,8 +36,12 @@
 	font-weight: bold;
 }
 
-.pl-error {
-	margin: 10px;
+.login-error {
+	color: #E50A12;
+	font-size: 1.1rem;
+}
+
+.signup-error {
 	text-align: left;
 	color: #E50A12;
 	font-size: 1.1rem;

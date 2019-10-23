@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { FaSearch } from 'react-icons/fa'
 import MovieCard from '../components/MovieCard'
 import SearchModal from '../components/SearchModal'
-import { rails_api } from '../constants'
+import { backend_api } from '../constants'
 import '../stylesheets/Search.scss'
 
 
@@ -36,7 +36,7 @@ class Search extends React.Component {
   // }
 
   searchTMDB = (pageNum=1, query=this.state.query ) => {
-    fetch(`${rails_api}/tmdb-search`,  {
+    fetch(`${backend_api}/tmdb-search`,  {
       method: "POST",
       headers: { Authorization: `Bearer ${localStorage.token}`,
         "Content-Type": "application/json",

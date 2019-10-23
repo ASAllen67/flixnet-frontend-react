@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { rails_api } from './constants'
+import { backend_api } from './constants'
 import Login from './views/Login'
 import Signup from './views/Signup'
 import Navibar from './components/Navibar'
@@ -13,7 +13,7 @@ class App extends React.Component {
 
 	componentDidMount() {
 		if (this.props.loggedIn) {
-			fetch(`${rails_api}/user`, {
+			fetch(`${backend_api}/user`, {
 				headers: { Authorization: `Bearer ${localStorage.token}` }
 			})
 			.then(res => res.json())

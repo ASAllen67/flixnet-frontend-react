@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import NodeRSA from 'node-rsa'
 import flixnet_logo from '../images/flixnet_logo.png'
-import { rails_api, public_key } from '../constants'
+import { backend_api, public_key } from '../constants'
 import '../stylesheets/prelogin.scss'
 
 
@@ -23,7 +23,7 @@ class Login extends React.Component {
 			password: lock.encrypt(form.password.value, 'base64')
 		}
 
-		fetch(`${rails_api}/sessions`, {
+		fetch(`${backend_api}/sessions`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -53,7 +53,7 @@ class Login extends React.Component {
 				<div className="pl-form-container">
 					<h1 className="pl-heading">Log In</h1>
 
-					{ this.state.error && <p className="pl-error">{this.state.error}</p> }
+					{ this.state.error && <p className="login-error">{this.state.error}</p> }
 
 					<form className="pl-form" onSubmit={this.handleLogin}>
 						<input className="pl-input top" required type="text" name="username" placeholder="Username" /><br/>

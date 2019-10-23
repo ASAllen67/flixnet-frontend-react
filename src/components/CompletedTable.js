@@ -4,7 +4,7 @@ import { FaRegHeart } from 'react-icons/fa'
 import { GiCrownedHeart } from 'react-icons/gi'
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 import poster_placeholder from '../images/poster_placeholder.jpeg'
-import { rails_api } from '../constants'
+import { backend_api } from '../constants'
 
 
 class CompletedTable extends React.Component {
@@ -12,14 +12,14 @@ class CompletedTable extends React.Component {
 	deleteEntry = (id, tmdb_id) => {
 		this.props.dispatch({ type: "DELETE_COMPLETED_ENTRY", id, tmdb_id })
 		
-		fetch(`${rails_api}/completed_entries/${id}`, {
+		fetch(`${backend_api}/completed_entries/${id}`, {
 			method: "DELETE",
 			headers: { Authorization: `Bearer ${localStorage.token}` }
 		})
 	}
 
 	createFavorite = entry => {
-		fetch(`${rails_api}/favorites`, {
+		fetch(`${backend_api}/favorites`, {
 			method: "POST",
 			headers: { Authorization: `Bearer ${localStorage.token}`,
 				"Content-type": "application/json",

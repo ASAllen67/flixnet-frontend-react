@@ -5,11 +5,10 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import Modal from 'react-modal'
 import App from './App'
-
 import './stylesheets/index.css'
 import './stylesheets/bootstrap.min.css'
-
 import * as serviceWorker from './serviceWorker'
+
 
 Modal.setAppElement('#root')
 
