@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { FaSearch } from 'react-icons/fa'
-// import { tmdb_key } from '../keys'
 import MovieCard from '../components/MovieCard'
 import SearchModal from '../components/SearchModal'
 import { rails_api } from '../constants'

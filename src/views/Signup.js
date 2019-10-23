@@ -1,50 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import ReactLoading from 'react-loading'
-import JSEncrypt from 'jsencrypt'
+import NodeRSA from 'node-rsa'
 import flixnet_logo from '../images/flixnet_logo.png'
-import { rails_api } from '../constants'
+import { rails_api, public_key } from '../constants'
 import '../stylesheets/prelogin.scss'
 
 
 class Signup extends React.Component {
 
 	state = {
-		loading: false,
-		public_key: null,
 		errors: null
-	}
-
-	componentDidMount() {
-		this.fetchPublicKey()
-	}
-
-	fetchPublicKey = () => {
-		fetch(`${rails_api}/public_key`)
-		.then(res => res.json())
-		.then(res => {
-			if (res.public_key) {
-				let lock = new JSEncrypt()
-				lock.setPublicKey(res.public_key)
-				this.setState({ loading: false, public_key: lock })
-			}
-		})
-		.catch(error => {
-			setTimeout(this.fetchPublicKey, 5000)
-			if (!this.state.loading)
-				this.setState({ loading: true })
-		})
 	}
 
 	handleSignup = e => {
 		e.preventDefault()
 
-		let form = e.target
+		const form = e.target
+		const lock = new NodeRSA(public_key)
 		let credentials = {
-			username: this.state.public_key.encrypt(form.username.value),
-			password: this.state.public_key.encrypt(form.password.value),
-			confirm_password: this.state.public_key.encrypt(form.confirm_password.value),
+			username: lock.encrypt(form.username.value, 'base64'),
+			password: lock.encrypt(form.password.value, 'base64'),
+			confirm_password: lock.encrypt(form.confirm_password.value, 'base64'),
 		}
 
 		fetch(`${rails_api}/users`, {
@@ -71,16 +48,6 @@ class Signup extends React.Component {
 	}
 
 	render() {
-		
-		if (this.state.loading) {
-			return (
-				<div className="pl-loading">
-					<ReactLoading type="bars" color="#E50A12" height="20%" width="20%" />
-					<div>Waking up Heroku database</div>
-				</div>
-			)
-		}
-
 		return (
 			<div id="Signup" className="pl-page">
 				<img className="pl-logo" src={flixnet_logo} draggable="false" alt="FlixNet Logo" />
