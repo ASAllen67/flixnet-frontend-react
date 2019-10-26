@@ -51,10 +51,10 @@ class TrackerForm extends React.Component {
 	handleSubmit = e => {
 		e.preventDefault()
 
-		let form = e.target
-		let m = this.props.movie
+		const form = e.target
+		const m = this.props.movie
 
-		let entry = {
+		const entry = {
 			title: m.title,
 			overview: m.overview,
 			poster_path: m.poster_path,
