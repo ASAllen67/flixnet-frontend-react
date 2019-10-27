@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { IoIosArrowForward } from 'react-icons/io'
-import { backend_api } from '../constants'
+import { create_entry } from '../actions/entries'
 import '../stylesheets/TrackerForm.scss'
 
 
@@ -10,20 +10,20 @@ class TrackerForm extends React.Component {
 	state = {
 		hidden: true,
 
-		status: "",
+		entry_type: '',
 
 		hideScore: true,
-		score: "",
+		score: '',
 
 		hideSubmit: true
 	}
 	baseState = this.state
 
 	componentDidUpdate() {
-	  this.bottom.scrollIntoView({ behavior: "smooth" })
+	  this.bottom.scrollIntoView({ behavior: 'smooth' })
 	}
 
-	toggleTrackerForm = ()=> {
+	toggleTrackerForm = () => {
 		if (this.state.hidden)
 			this.setState({ hidden: false })
 		else
@@ -31,97 +31,56 @@ class TrackerForm extends React.Component {
 	}
 
 	checkStatus = e => {
-		let status = e.target
-		let hideScore = true
-		let hideSubmit = true
+		const entry_type = e.target.value
 
-		if (status.value === "Completed")
-			hideScore = false
-		else if (status.value)
-			hideSubmit = false
-		
-		this.setState({ status: status.value, hideScore, hideSubmit })
+		if (entry_type === 'completed')
+			this.setState({ entry_type, hideScore: false, hideSubmit: true  })
+		else
+			this.setState({ entry_type, hideScore: true, score: '', hideSubmit: false })
 	}
 
-	checkScore = e => {
-		if (e.target.value)
-			this.setState({ score: e.target.value, hideSubmit: false })
-	}
+	checkScore = e => this.setState({ score: e.target.value, hideSubmit: false })
 
 	handleSubmit = e => {
 		e.preventDefault()
 
-		const form = e.target
-		const m = this.props.movie
+		let entry = this.props.movie
+		entry.score = this.state.score
 
-		const entry = {
-			title: m.title,
-			overview: m.overview,
-			poster_path: m.poster_path,
-			score: form.score.value,
-			tmdb_id: m.id
-		}
-
-		let url = backend_api
-		let type
-
-		if (this.state.status === "Completed") {
-			url += "/completed_entries"
-			type = "ADD_COMPLETED_ENTRY"
-		}
-		else {
-			url += "/backlog_entries"
-			type = "ADD_BACKLOG_ENTRY"
-		}
-
-		fetch(url, {
-			method: "POST",
-			headers: {
-				Authorization: `Bearer ${localStorage.token}`,
-				"Content-Type": "application/json",
-				Accept: "application/json"
-			},
-			body: JSON.stringify({ entry })
-		})
-		.then(res => res.json())
-		.then(res => {
-			if (res.entry) {
-				this.props.dispatch({ type, entry: res.entry })
-			}
-		})
+		create_entry(entry.id, entry, this.state.entry_type, this.props.dispatch)
 	}
 
 	render() {
 		return (
-			<div className="tf-container">
-				<button className={this.state.hidden ? "tf-toggle red-btn" : "tf-toggle inverted-red-btn"} onClick={this.toggleTrackerForm}>{this.state.hidden ? "Add to my Tracker" : "Cancel"}</button>
+			<div className='tf-container'>
+				<button className={this.state.hidden ? 'tf-toggle red-btn' : 'tf-toggle inverted-red-btn'} onClick={this.toggleTrackerForm}>{this.state.hidden ? 'Add to my Tracker' : 'Cancel'}</button>
 
-				<form className="tracker-form" hidden={this.state.hidden} onSubmit={this.handleSubmit}>
-					<div className="tf-item-container">
+				<form className='tracker-form' hidden={this.state.hidden} onSubmit={this.handleSubmit}>
+					<div className='tf-item-container'>
 						&nbsp;<IoIosArrowForward/>&nbsp;
-						<select name="status" className="tf-select" value={this.state.status} onChange={this.checkStatus} required>
-							<option disabled value="">Choose a status</option>
-							<option>Completed</option>
-							<option>Plan to Watch</option>
+						<select name='entry_type' className='tf-select' value={this.state.entry_type} onChange={this.checkStatus} required>
+							<option disabled value=''>Choose a status</option>
+							<option value='completed'>Completed</option>
+							<option value='backlog'>Plan to Watch</option>
 						</select>
 					</div>
 
-					<div className="tf-item-container" hidden={this.state.hideScore}>
+					<div className='tf-item-container' hidden={this.state.hideScore}>
 						&nbsp;<IoIosArrowForward/>&nbsp;
-						<select name="score" className="tf-select" value={this.state.score} onChange={this.checkScore} required={!this.state.hideScore}>
-							<option disabled value="">Choose a score</option>
-							<option value="5">5 - Masterpiece</option>
-							<option value="4">4 - Great</option>
-							<option value="3">3 - Average</option>
-							<option value="2">2 - Mediocre</option>
-							<option value="1">1 - Appalling</option>
-							<option value="0">No score</option>
+						<select name='score' className='tf-select' value={this.state.score} onChange={this.checkScore} required={!this.state.hideScore}>
+							<option disabled value=''>Choose a score</option>
+							<option value='5'>5 - Masterpiece</option>
+							<option value='4'>4 - Great</option>
+							<option value='3'>3 - Average</option>
+							<option value='2'>2 - Mediocre</option>
+							<option value='1'>1 - Appalling</option>
+							<option value='0'>No score</option>
 						</select>
 					</div>
 
-					<div className="tf-item-container" hidden={this.state.hideSubmit}>
+					<div className='tf-item-container' hidden={this.state.hideSubmit}>
 						&nbsp;<IoIosArrowForward/>&nbsp;
-						<button className="tf-submit red-btn" type="submit">Add</button>
+						<button className='tf-submit red-btn' type='submit'>Add</button>
 					</div>
 				</form>
 

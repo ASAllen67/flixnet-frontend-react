@@ -36,13 +36,12 @@ class Search extends React.Component {
   // }
 
   searchTMDB = (pageNum=1, query=this.state.query ) => {
-    fetch(`${backend_api}/tmdb-search`,  {
-      method: "POST",
-      headers: { Authorization: `Bearer ${localStorage.token}`,
-        "Content-Type": "application/json",
-        Accept: "application/json"
+    fetch(`${backend_api}/sessions/tmdb-search?query=${query}&pageNum=${pageNum}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
       },
-      body: JSON.stringify({ query, pageNum })
     })
     .then(res => res.json())
     .then(res => {
@@ -58,26 +57,27 @@ class Search extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.searchTMDB(1, e.target.query.value)
+    if (e.target.query.value !== this.state.query)
+      this.searchTMDB(1, e.target.query.value)
   }
 
-  renderResults = ()=> {
+  renderResults = () => {
   	let results = this.state.results
     let user = this.props.user
 
   	if(results === null)
-  		return <div className="empty-search-text">Let's find some movies to watch!</div>
+  		return <div className='empty-search-text'>Let's find some movies to watch!</div>
   	else if (results.length === 0)
-  		return <div className="empty-search-text">Zero results found for "{this.state.query}"</div>
+  		return <div className='empty-search-text'>Zero results found for '{this.state.query}'</div>
   	else
   		return (
         <Fragment>
-    			<div className="search-results">
+    			<div className='search-results'>
     				{ results.map(m => {
 
-              let seen = user.completed_ids.includes(m.id)
-              let backlogged = user.backlog_ids.includes(m.id)
-              let favorited = user.favorite_ids.includes(m.id)
+              let seen = !!user.completed[m.id]
+              let backlogged = !!user.backlog[m.id]
+              let favorited = !!user.favorites[m.id]
 
               return (
                 <div key={m.id} onClick={()=> this.setState({ showModal: m }) }>
@@ -91,29 +91,36 @@ class Search extends React.Component {
               )
             })}
   				</div>
-
-          <button
-            className="results-page-button inverted-red-btn"
-            disabled={this.state.page === 1}
-            onClick={()=> this.searchTMDB(this.state.page - 1) }>
-            Previous
-          </button>
-
-          <button
-            className="results-page-button inverted-red-btn"
-            disabled={this.state.page === this.state.lastPage}
-            onClick={()=> this.searchTMDB(this.state.page + 1) }>
-            Next
-          </button>
-
-          <div className="page-text">
-            Page {this.state.page} of {this.state.lastPage} ({this.state.total_results} results)
-          </div>
+          { this.renderPageButtons() }
         </Fragment>
 			)
   }
 
-  renderModal = ()=> {
+  renderPageButtons = () => {
+    return (
+      <Fragment>
+        <button
+          className='results-page-button inverted-red-btn'
+          disabled={this.state.page === 1}
+          onClick={()=> this.searchTMDB(this.state.page - 1) }>
+          Previous
+        </button>
+
+        <button
+          className='results-page-button inverted-red-btn'
+          disabled={this.state.page === this.state.lastPage}
+          onClick={()=> this.searchTMDB(this.state.page + 1) }>
+          Next
+        </button>
+
+        <div className='page-text'>
+          Page {this.state.page} of {this.state.lastPage} ({this.state.total_results} results)
+        </div>
+      </Fragment>
+    )
+  }
+
+  renderModal = () => {
     if (this.state.showModal) {
       return <SearchModal movie={this.state.showModal} closeModal={this.closeModal}/>
     }
@@ -128,12 +135,12 @@ class Search extends React.Component {
 
 	render() {
 	  return (
-	   <div id="Search">
+	   <div id='Search'>
       { this.renderModal() }
 
-	   	<form className="search-form" onSubmit={this.handleSubmit}>
-	    	<input required className="search-input" name="query" type="search" placeholder="Search"/>
-	    	<button className="search-button" type="submit"><FaSearch/></button>
+	   	<form className='search-form' onSubmit={this.handleSubmit}>
+	    	<input required className='search-input' name='query' type='search' placeholder='Search'/>
+	    	<button className='search-button' type='submit'><FaSearch/></button>
 	    </form>
 
 	    { this.renderResults() }

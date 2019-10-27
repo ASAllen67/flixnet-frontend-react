@@ -18,18 +18,18 @@ class App extends React.Component {
 
 	componentDidMount() {
 		if (this.props.loggedIn) {
-			fetch(`${backend_api}/user`, {
+			fetch(`${backend_api}/users/current`, {
 				headers: { Authorization: `Bearer ${localStorage.token}` }
 			})
 			.then(res => res.json())
 			.then(res => {
 				this.setState({ loading: false })
 				if (res.user)
-					this.props.dispatch({ type: "SET_USER", user: res.user })
+					this.props.dispatch({ type: 'SET_USER', user: res.user })
 				else
-					this.props.dispatch({ type: "LOG_OUT" })
+					this.props.dispatch({ type: 'LOG_OUT' })
 			})
-			.catch(error => this.props.dispatch({ type: "LOG_OUT" }) )
+			.catch(error => this.props.dispatch({ type: 'LOG_OUT' }) )
 		}
 		else {
 			fetch(backend_api)
@@ -38,29 +38,29 @@ class App extends React.Component {
 	}
 
 	loading = () => (
-		<div className="loading">
-			<ReactLoading type="bars" color="#E50A12" height="20%" width="20%" />
+		<div className='loading'>
+			<ReactLoading type='bars' color='#E50A12' height='20%' width='20%' />
 			<div>Waking up Heroku database</div>
 		</div>
 	)
 
 	loggedInRoutes = ()=> (
-		<div id="App">
+		<div id='App'>
 			<Navibar/>
 			<Switch>
 				<Route exact path='/search' component={Search} />
 				<Route exact path='/tracker' component={MovieTracker} />
-				<Redirect to="/search" />
+				<Redirect to='/search' />
 			</Switch>
 		</div>
 	)
 
 	loggedOutRoutes = () => (
-		<div id="App">
+		<div id='App'>
 			<Switch>
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={Signup} />
-				<Redirect to="/login" />
+				<Redirect to='/login' />
 			</Switch>
 		</div>
 	)

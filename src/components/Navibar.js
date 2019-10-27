@@ -22,30 +22,30 @@ const storeScroll = () => {
 class Navibar extends React.Component {
 
 	componentDidMount() {
-		document.addEventListener("scroll", debounce(storeScroll, 100));
+		document.addEventListener('scroll', debounce(storeScroll, 100));
 		storeScroll();
 	}
 
 	render() {
 		return (
-	    <Navbar id="Navibar" expand="md">
-	      <img className="brand" draggable="false" src={flixnet_logo} alt="banner"/>
+	    <Navbar id='Navibar' expand='md'>
+	      <img className='brand' draggable='false' src={flixnet_logo} alt='banner'/>
 
-	      <Navbar.Toggle variant="light" aria-controls="basic-navbar-nav" className="bg-dark toggle-button"/>
-	      <Navbar.Collapse id="basic-navbar-nav">
-					<Link to="/search" className="nav-link">
+	      <Navbar.Toggle variant='light' aria-controls='basic-navbar-nav' className='bg-dark toggle-button'/>
+	      <Navbar.Collapse id='basic-navbar-nav'>
+					<Link to='/search' className='nav-link'>
 						Search
-						<span className="bottom"></span>
+						<span className='bottom'></span>
 					</Link>
 
-					<Link to="/tracker" className="nav-link">
+					<Link to='/tracker' className='nav-link'>
 						Movie&nbsp;Tracker
-						<span className="bottom"></span>
+						<span className='bottom'></span>
 					</Link>
 
-					<div className="nav-link logout" onClick={()=> this.props.dispatch({ type: "LOG_OUT" })}>
+					<div className='nav-link logout' onClick={()=> this.props.dispatch({ type: 'LOG_OUT' })}>
 						 Logout
-						<span className="bottom"></span>
+						<span className='bottom'></span>
 					</div>
 	      </Navbar.Collapse>
 	    </Navbar>

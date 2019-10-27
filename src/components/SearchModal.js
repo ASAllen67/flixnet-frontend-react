@@ -10,18 +10,18 @@ import '../stylesheets/SearchModal.scss'
 class SearchModal extends React.Component {
 
 	componentDidMount() {
-		document.body.style.overflow = "hidden"   
+		document.body.style.overflow = 'hidden'   
 	}
 
 	componentWillUnmount() {
-		document.body.style.overflow = "unset"
+		document.body.style.overflow = 'unset'
 	}
 
 	showForm = ()=> {
-		if (this.props.user.completed_ids.includes(this.props.movie.id))
-			return <div>You've seen this movie. <FaRegCheckCircle className="svg-align green"/></div>
+		if (this.props.user.completed[this.props.movie.id])
+			return <div>You've seen this movie. <FaRegCheckCircle className='svg-align green'/></div>
 
-		if (this.props.user.backlog_ids.includes(this.props.movie.id))
+		if (this.props.user.backlog[this.props.movie.id])
 			return <div>You have backlogged this movie.</div>
 
 		else
@@ -37,15 +37,15 @@ class SearchModal extends React.Component {
 		if (m.release_date) {
 			let dateArr = m.release_date.split('-')
 			release_date =
-			<h5 className="mm-h5">
+			<h5 className='mm-h5'>
 				{`Released on ${months[parseInt(dateArr[1])-1]} ${dateArr[2]}, ${dateArr[0]}`}
 			</h5>
 		}
 
 		if (m.genre_ids.length) {
 			genres =
-			<h5 className="mm-h5">
-				Genres: { m.genre_ids.map(g => TMDB_genres[g]).join(", ") }
+			<h5 className='mm-h5'>
+				Genres: { m.genre_ids.map(g => TMDB_genres[g]).join(', ') }
 			</h5>
 		}
 
@@ -53,17 +53,17 @@ class SearchModal extends React.Component {
 			overview =
 			<Fragment>
 				<br/>
-				<div className="mm-overview-container">
-					<h5 className="mm-overview-label">Overview</h5>
-					<p className="mm-overview-text">"{m.overview}"</p>
+				<div className='mm-overview-container'>
+					<h5 className='mm-overview-label'>Overview</h5>
+					<p className='mm-overview-text'>'{m.overview}'</p>
 				</div>
 			</Fragment>
 		}
 
 		return (
-			<Modal className="movie-modal" isOpen={true}>
-				<div className="mm-close-div"><IoIosCloseCircleOutline className="mm-close" onClick={this.props.closeModal}/></div>
-				<h1 className="mm-h1">{m.title}</h1>
+			<Modal className='movie-modal' isOpen={true}>
+				<div className='mm-close-div'><IoIosCloseCircleOutline className='mm-close' onClick={this.props.closeModal}/></div>
+				<h1 className='mm-h1'>{m.title}</h1>
 				{ release_date }
 				{    genres    }
 				{   overview   }

@@ -24,44 +24,43 @@ class Login extends React.Component {
 		}
 
 		fetch(`${backend_api}/sessions`, {
-			method: "POST",
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json" 
+				'Content-Type': 'application/json',
+				Accept: 'application/json' 
 			},
 			body: JSON.stringify(credentials)
 		})
 		.then(res => res.json())
 		.then(res => {
 			if (res.error) {
-				form.password.value = ""
+				form.password.value = ''
 				this.setState({ error: res.error })
 			}
 			else if (res.token) {
-				localStorage.setItem("token", res.token)
-				this.props.dispatch({ type: "LOG_IN" })
-				this.props.dispatch({ type: "SET_USER", user: res.user })
+				this.props.dispatch({ type: 'LOG_IN', token: res.token })
+				this.props.dispatch({ type: 'SET_USER', user: res.user })
 			}
 		})
 	}
 
 	render() {
 		return (
-			<div id="Login" className="pl-page">
-				<img className="pl-logo" src={flixnet_logo} draggable="false" alt="FlixNet Logo" />
+			<div id='Login' className='pl-page'>
+				<img className='pl-logo' src={flixnet_logo} draggable='false' alt='FlixNet Logo' />
 
-				<div className="pl-form-container">
-					<h1 className="pl-heading">Log In</h1>
+				<div className='pl-form-container'>
+					<h1 className='pl-heading'>Log In</h1>
 
-					{ this.state.error && <p className="login-error">{this.state.error}</p> }
+					{ this.state.error && <p className='login-error'>{this.state.error}</p> }
 
-					<form className="pl-form" onSubmit={this.handleLogin}>
-						<input className="pl-input top" required type="text" name="username" placeholder="Username" /><br/>
-						<input className="pl-input" required type="password" name="password" placeholder="Password" />
-						<button className="pl-button red-btn" type="submit">Log In</button>
+					<form className='pl-form' onSubmit={this.handleLogin}>
+						<input className='pl-input top' required type='text' name='username' placeholder='Username' /><br/>
+						<input className='pl-input' required type='password' name='password' placeholder='Password' />
+						<button className='pl-button red-btn' type='submit'>Log In</button>
 					</form>
 
-					<Link to="/signup" className="pl-redirect">Don't have an account yet?</Link>
+					<Link to='/signup' className='pl-redirect'>Don't have an account yet?</Link>
 				</div>
 			</div>
 		)
