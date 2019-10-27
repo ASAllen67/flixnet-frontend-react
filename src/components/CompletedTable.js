@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { create_entry, destroy_entry } from '../actions/entries'
 import { GiCrownedHeart as FullHeart } from 'react-icons/gi'
-import { IoIosCloseCircleOutline, IoMdHeartEmpty as EmptyHeart } from 'react-icons/io'
+import { IoIosCloseCircleOutline as Ex, IoMdHeartEmpty as EmptyHeart } from 'react-icons/io'
 import poster_placeholder from '../images/poster_placeholder.jpeg'
 
 
@@ -23,7 +23,7 @@ class CompletedTable extends React.Component {
 					<td className='mt-overview'>{e.overview}</td>
 					<td>{e.score === 0 ? '-' : e.score}</td>
 					<td>{ this.props.favorites[mid] ? <FullHeart className='mt-heart'/> : <EmptyHeart className='mt-heart-click' onClick={()=> create_entry(mid, e, 'favorites', this.props.dispatch)}/> }</td>
-					<td><IoIosCloseCircleOutline onClick={()=> destroy_entry(mid, 'completed', this.props.dispatch)} className='mt-delete'/></td>
+					<td><Ex onClick={()=> destroy_entry(mid, 'completed', this.props.dispatch)} className='mt-delete'/></td>
 				</tr>
 			)
 		})

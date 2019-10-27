@@ -3,18 +3,9 @@ import { connect } from 'react-redux'
 import { destroy_entry } from '../actions/entries'
 import { FaHeartBroken } from 'react-icons/fa'
 import poster_placeholder from '../images/poster_placeholder.jpeg'
-import { backend_api } from '../constants'
+
 
 class FavoriteTable extends React.Component {
-
-	deleteFavorite = (id, mid) => {
-		this.props.dispatch({ type: 'DELETE_FAVORITE', id, mid })
-
-		fetch(`${backend_api}/favorites/${id}`, {
-			method: 'DELETE',
-			headers: { Authorization: `Bearer ${localStorage.token}` }
-		})
-	}
 
 	getTableBody = () => {
 		const { entries } = this.props

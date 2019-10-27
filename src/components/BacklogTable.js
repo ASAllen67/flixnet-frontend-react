@@ -10,6 +10,7 @@ class BacklogTable extends React.Component {
 	getTableBody = () => {
 		const entries = this.props.entries
 		return Object.keys(entries).map((mid, index) => {
+			
 			const e = entries[mid]
 			let poster_source = e.poster_path ? `https://image.tmdb.org/t/p/w154${e.poster_path}` : poster_placeholder
 
