@@ -16,16 +16,23 @@ export default (state = initialState, action) => {
     	return { ...action.user }
     }
 
-    case 'ADD_ENTRY': {
+    case 'CREATE_ENTRY': {
       let entries = copyObj(state[action.entry_type])
       entries[action.mid] = action.entry
 
       return { ...state, [action.entry_type]: entries }
     }
 
-    case 'DELETE_ENTRY': {
+    case 'DESTROY_ENTRY': {
       let entries = copyObj(state[action.entry_type])
       delete entries[action.mid]
+
+      return { ...state, [action.entry_type]: entries }
+    }
+
+    case 'UPDATE_ENTRY': {
+      let entries = copyObj(state[action.entry_type])
+      entries[action.entry.id] = action.entry
 
       return { ...state, [action.entry_type]: entries }
     }

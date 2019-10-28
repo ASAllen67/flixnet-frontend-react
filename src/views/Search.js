@@ -120,17 +120,14 @@ class Search extends React.Component {
     )
   }
 
+  closeModal = ()=> this.setState({ showModal: false })
+
   renderModal = () => {
     if (this.state.showModal) {
       return <SearchModal movie={this.state.showModal} closeModal={this.closeModal}/>
     }
     else
       return null
-  }
-
-  closeModal = ()=> {
-    if (this.state.showModal)
-      this.setState({ showModal: false })
   }
 
 	render() {

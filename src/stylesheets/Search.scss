@@ -115,17 +115,14 @@
 		width: 28vw;
 		height: 42vw;
 	}
-
 	@include media-breakpoint-only(md) {
 		width: 40vw;
 		height: 60vw;
 	}
-
 	@include media-breakpoint-only(sm) {
 		width: 40vw;
 		height: 60vw;
 	}
-
 	@include media-breakpoint-only(xs) {
 		width: 80vw;
 		height: 120vw;
@@ -166,7 +163,10 @@
 .mc-svg  { margin: 0 5px;  }
 .eye     { color: #00AEFF; }
 .backlog { color: #fff; }
-.heart   { color: #E50A12; }
+.heart   {
+	font-size: 1.2rem;
+	color: #E50A12;
+}
 
 .mc-poster {
 	width: 100%;
