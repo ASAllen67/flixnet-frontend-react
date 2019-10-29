@@ -18,15 +18,17 @@ class NotesModal extends React.Component {
 	getScoreInput = () => {
 		if (this.props.entry_type === 'completed' || this.props.entry_type === 'favorites')
 			return (
-				<select className='nm-select' name='score' defaultValue={this.props.entry.score}>
-					<option disabled >Choose a score</option>
-					<option value='5'>5 - Masterpiece</option>
-					<option value='4'>4 - Great</option>
-					<option value='3'>3 - Average</option>
-					<option value='2'>2 - Mediocre</option>
-					<option value='1'>1 - Appalling</option>
-					<option value='0'>No score</option>
-				</select>
+				<span className='nm-select-container'><strong>Score:</strong>&nbsp;
+					<select className='nm-select' name='score' defaultValue={this.props.entry.score}>
+						<option disabled >Choose a score</option>
+						<option value='5'>5 - Masterpiece</option>
+						<option value='4'>4 - Great</option>
+						<option value='3'>3 - Average</option>
+						<option value='2'>2 - Mediocre</option>
+						<option value='1'>1 - Appalling</option>
+						<option value='0'>No score</option>
+					</select>
+				</span>
 			)
 	}
 
@@ -55,8 +57,8 @@ class NotesModal extends React.Component {
 					<form className='nm-form' onSubmit={this.handleSubmit}>
 						<div>
 							<div className='nm-inputs-container'>
-								<span className='nm-select-container'><strong>Score:</strong> { this.getScoreInput() }</span>
-								<textarea className='nm-notes' name='notes' defaultValue={e.notes}/>
+								{ this.getScoreInput() }
+								<textarea className='nm-notes' name='notes' defaultValue={e.notes} placeholder='You can write notes about this movie here'/>
 							</div>
 						</div>
 						<button className='nm-btn inverted-red-btn' type='button' onClick={this.props.toggleModal}>Cancel</button>
