@@ -5,7 +5,6 @@
 $height: 50px;
 $duration: 0.20s;
 
-
 #Navibar {
 	z-index: 7;
 	position: fixed;
@@ -21,11 +20,18 @@ $duration: 0.20s;
 
 	transition: background-color 0.30s ease 0s;
 
+	@include media-breakpoint-only(md) {
+		position: absolute;
+		background-color: black;
+	}
+
 	@include media-breakpoint-only(sm) {
+		position: absolute;
 		background-color: black;
 	}
 
 	@include media-breakpoint-only(xs) {
+		position: absolute;
 		background-color: black;
 	}
 }
@@ -33,6 +39,10 @@ $duration: 0.20s;
 html:not([data-scroll="0"]) {
 	#Navibar {
 		background-color: rgba(0,0,0, 0.90);
+
+		@include media-breakpoint-only(md) {
+			background-color: black;
+		}
 
 		@include media-breakpoint-only(sm) {
 			background-color: black;

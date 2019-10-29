@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import NotesModal from '../components/NotesModal'
+import SearchModal from '../components/SearchModal'
 import CompletedTable from '../components/tables/completed'
 import BacklogTable from '../components/tables/backlog'
 import FavoriteTable from '../components/tables/favorites'
@@ -30,7 +31,7 @@ class MovieTracker extends React.Component {
 		if (this.state.entry_type === 'completed')
 			message = `You have seen ${count}`
 		else if (this.state.entry_type === 'backlog')
-			message = `There ${grammar} ${count} in your Backlog`
+			message = `You have backlogged ${count}`
 		else
 			message = `You have favorited ${count}`
 

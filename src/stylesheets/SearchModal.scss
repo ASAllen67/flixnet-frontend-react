@@ -14,15 +14,19 @@
 
 	width: 60vw;
 	height: 500px;
-	max-height: 80vh;
+	max-height: 85vh;
 
 	margin: auto;
 	padding: 20px;
 
 	color: white;
-	background-color: black;
+	background-color: #191919;
 	border: 2px solid #E50A12;
-	border-radius: 0 24px 0 24px;
+
+	@include media-breakpoint-only(md) {
+		top: 50px;
+		margin: 0 auto;
+	}
 
 	@include media-breakpoint-only(xs) {
 		top: 50px;
@@ -60,7 +64,7 @@
 
 	@include media-breakpoint-only(xs) {
 		width: 100%;
-	margin-top: 5px;
+		margin-top: 5px;
 	}
 }
 .mm-overview-label {
@@ -84,7 +88,5 @@
 	transform: scale(2);
 	&:hover { color: #E50A12; }
 
-	@include media-breakpoint-only(xs) {
-		margin-top: 5px;
-	}
+	@include media-breakpoint-only(xs) { margin-top: 5px; }
 }

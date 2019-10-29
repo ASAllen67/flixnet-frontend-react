@@ -11,21 +11,19 @@ $gold: #FADF61;
 	min-height: 100vh;
 	height: 100%;
 	width: 100%;
-	padding: 100px 0 50px;
+	padding-top: 80px;
 	text-align: center;
 }
 
 .mt-heading {
 	font-family: Helvetica;
-	margin-bottom: 20px;
-}
+	margin: 0 20px;
+	font-size: 2.5rem;
 
-.mt-status-options {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 40px;
+	@include media-breakpoint-only(md) { font-size: 2rem; }
+	@include media-breakpoint-only(sm) { font-size: 2rem; }
+	@include media-breakpoint-only(xs) { font-size: 1.5rem; }
 }
-
 
 .mt-bottom {
   position: absolute;
@@ -41,6 +39,11 @@ $gold: #FADF61;
   transition: transform $duration ease;
 }
 
+.mt-status-options {
+	display: flex;
+	justify-content: center;
+	margin: 40px 0;
+}
 
 .mt-status-item {
 	position: relative;
@@ -66,26 +69,35 @@ $gold: #FADF61;
 }
 
 .mt-table {
-	margin: 0 auto;
+	margin: 0 auto !important;
 	@include media-breakpoint-only(xl) { width: 90% !important; }
 	@include media-breakpoint-only(lg) { width: 90% !important; }
 }
 
-.mt-table-title {
-	width: 25%;
+.mt-index {
+	@include media-breakpoint-only(md) { display: none; }
+	@include media-breakpoint-only(sm) { display: none; }
+	@include media-breakpoint-only(xs) { display: none; }
+}
+
+.mt-poster {}
+
+.mt-poster-img {
+	// maintain aspect ratio 2:3
+	// original = 342x513 px
+	@include media-breakpoint-only(md) { width: 15vw; }
+	@include media-breakpoint-only(sm) { width: 20vw; }
+	@include media-breakpoint-only(xs) { width: 25vw; }
+}
+
+.mt-title {
+	min-width: 25vw;
 	font-size: 1.4rem;
-	@include media-breakpoint-only(md) { font-size: 1rem; }
-	@include media-breakpoint-only(sm) { font-size: 1rem; }
+
 	@include media-breakpoint-only(xs) { font-size: 1rem; }
 }
 
-.mt-poster {
-	// maintain aspect ratio 2:3
-	// original = 342x513 px
-	@include media-breakpoint-only(md) { width: 12vw; }
-	@include media-breakpoint-only(sm) { width: 12vw; }
-	@include media-breakpoint-only(xs) { width: 12vw; }
-}
+.mt-score {}
 
 .mt-overview {
 	@include media-breakpoint-only(md) { display: none; }
@@ -93,17 +105,17 @@ $gold: #FADF61;
 	@include media-breakpoint-only(xs) { display: none; }
 }
 
+
+.mt-last {
+	@include media-breakpoint-only(xl) { min-width: 5vw; }
+}
+
 .mt-row {
-	&:hover .mt-edit {
-		visibility: visible;
-	}
+	&:hover .mt-edit { visibility: visible; }
 }
 
 .mt-edit {
 	visibility: hidden;
-	// @include media-breakpoint-only(md) { visibility: visible; }
-	// @include media-breakpoint-only(sm) { visibility: visible; }
-	// @include media-breakpoint-only(xs) { visibility: visible; }
 }
 
 //____________________ SVG => END ____________________

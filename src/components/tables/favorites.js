@@ -20,16 +20,16 @@ class FavoriteTable extends React.Component {
 
 		return Object.keys(entries).map((mid, index) => {
 			const e = entries[mid]
-			const poster_source = e.poster_path ? `https://image.tmdb.org/t/p/w154${e.poster_path}` : poster_placeholder
+			const poster_source = e.poster_path ? `https://image.tmdb.org/t/p/w185${e.poster_path}` : poster_placeholder
 
 			return (
 				<tr key={index} className='mt-row'>
-					<td>{index+1}</td>
-					<td className='mt-poster'><img src={poster_source} alt='movie-poster'/></td>
-					<td className='mt-table-title'>{e.title}</td>
-					<td>{e.score === 0 ? '-' : e.score}</td>
+					<td className='mt-index'>{index+1}</td>
+					<td className='mt-poster'><img className='mt-poster-img' src={poster_source} alt='movie-poster'/></td>
+					<td className='mt-title'>{e.title}</td>
+					<td className='mt-score'>{e.score === 0 ? '-' : e.score}</td>
 					<td className='mt-overview'>{ this.props.hideOverview ? null : e.overview }</td>
-					<td>
+					<td className='mt-last'>
 						<div className='mt-edit'>
 							<span data-tip='Edit Entry'>
 								<Notes className='mt-notes svg-edit' onClick={() => this.props.toggleModal({ mid, e })}/>
@@ -51,7 +51,7 @@ class FavoriteTable extends React.Component {
 			<Table striped className='mt-table table-dark'>
 				<thead>
 					<tr className='no-wrap'>
-						<th>#</th>
+						<th className='mt-index'>#</th>
 						<th>Poster</th>
 						<th>Title</th>
 						<th>Score</th>

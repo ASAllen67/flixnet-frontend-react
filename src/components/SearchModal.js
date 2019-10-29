@@ -2,15 +2,15 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import TrackerForm from './TrackerForm'
-import { FaRegCheckCircle } from 'react-icons/fa'
-import { IoIosCloseCircleOutline } from 'react-icons/io'
+import { FaRegCheckCircle as Check } from 'react-icons/fa'
+import { IoIosCloseCircleOutline as Ex } from 'react-icons/io'
 import { TMDB_genres, months } from '../constants'
 import '../stylesheets/SearchModal.scss'
 
 class SearchModal extends React.Component {
 
 	componentDidMount() {
-		document.body.style.overflow = 'hidden'   
+		document.body.style.overflow = 'hidden'  
 	}
 
 	componentWillUnmount() {
@@ -19,10 +19,10 @@ class SearchModal extends React.Component {
 
 	showForm = ()=> {
 		if (this.props.user.completed[this.props.movie.id])
-			return <div>You've seen this movie. <FaRegCheckCircle className='svg-align green'/></div>
+			return <div>You've seen this movie <Check className='svg-align green'/></div>
 
 		if (this.props.user.backlog[this.props.movie.id])
-			return <div>You have backlogged this movie.</div>
+			return <div>You have backlogged this movie <Check className='svg-align green'/></div>
 
 		else
 			return <TrackerForm movie={this.props.movie}/>
@@ -55,14 +55,14 @@ class SearchModal extends React.Component {
 				<br/>
 				<div className='mm-overview-container'>
 					<h5 className='mm-overview-label'>Overview</h5>
-					<p className='mm-overview-text'>'{m.overview}'</p>
+					<p className='mm-overview-text'>"{m.overview}"</p>
 				</div>
 			</Fragment>
 		}
 
 		return (
 			<Modal className='movie-modal' isOpen={true}>
-				<div className='mm-close-div'><IoIosCloseCircleOutline className='mm-close' onClick={this.props.closeModal}/></div>
+				<div className='mm-close-div'><Ex className='mm-close' onClick={this.props.closeModal}/></div>
 				<h1 className='mm-h1'>{m.title}</h1>
 				{ release_date }
 				{    genres    }

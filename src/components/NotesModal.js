@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { update_entry } from '../actions/entries'
@@ -18,18 +18,15 @@ class NotesModal extends React.Component {
 	getScoreInput = () => {
 		if (this.props.entry_type === 'completed' || this.props.entry_type === 'favorites')
 			return (
-				<Fragment>
-					<select name='score' className='nm-select' defaultValue={this.props.entry.score}>
-						<option disabled >Choose a score</option>
-						<option value='5'>5 - Masterpiece</option>
-						<option value='4'>4 - Great</option>
-						<option value='3'>3 - Average</option>
-						<option value='2'>2 - Mediocre</option>
-						<option value='1'>1 - Appalling</option>
-						<option value='0'>No score</option>
-					</select>
-					<br/><br/>
-				</Fragment>
+				<select className='nm-select' name='score' defaultValue={this.props.entry.score}>
+					<option disabled >Choose a score</option>
+					<option value='5'>5 - Masterpiece</option>
+					<option value='4'>4 - Great</option>
+					<option value='3'>3 - Average</option>
+					<option value='2'>2 - Mediocre</option>
+					<option value='1'>1 - Appalling</option>
+					<option value='0'>No score</option>
+				</select>
 			)
 	}
 
@@ -46,20 +43,26 @@ class NotesModal extends React.Component {
 		entry.notes = form.notes.value
 
 		update_entry(entry.id, entry, entry_type, this.props.dispatch)
+		this.props.toggleModal()
 	}
 
 	render() {
 		const e = this.props.entry
 		return (
-			<Modal isOpen={true}>
-				<h3>Editing notes for "{e.title}"</h3>
-				<form onSubmit={this.handleSubmit}>
-					{ this.getScoreInput() }
-					<textarea className='nm-notes' name='notes' defaultValue={e.notes}/>
-					<br/>
-					<button type='button' onClick={this.props.toggleModal}>Close</button>
-					<button type='submit'>Update</button>
-				</form>
+			<Modal className='modal-container' isOpen={true}>
+				<div className='notes-modal'>
+					<h3 className='nm-heading'>{e.title}</h3>
+					<form className='nm-form' onSubmit={this.handleSubmit}>
+						<div>
+							<div className='nm-inputs-container'>
+								<span className='nm-select-container'><strong>Score:</strong> { this.getScoreInput() }</span>
+								<textarea className='nm-notes' name='notes' defaultValue={e.notes}/>
+							</div>
+						</div>
+						<button className='nm-btn inverted-red-btn' type='button' onClick={this.props.toggleModal}>Cancel</button>
+						<button className='nm-btn red-btn' type='submit'>Update</button>
+					</form>
+				</div>
 			</Modal>
 		)
 	}
