@@ -27,7 +27,7 @@ class FavoriteTable extends React.Component {
 					<td className='mt-index'>{index+1}</td>
 					<td className='mt-poster'><img className='mt-poster-img' src={poster_source} alt='movie-poster'/></td>
 					<td className='mt-title'>{e.title}</td>
-					<td className='mt-score'>{e.score === 0 ? '-' : e.score}</td>
+					<td className='mt-score'>{e.score === '0' ? '-' : e.score}</td>
 					<td className='mt-overview'>{ this.props.hideOverview ? null : e.overview }</td>
 					<td className='mt-last'>
 						<div className='mt-edit'>
