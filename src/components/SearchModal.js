@@ -49,24 +49,17 @@ class SearchModal extends React.Component {
 			</h5>
 		}
 
-		if (m.overview) {
-			overview =
-			<Fragment>
-				<br/>
-				<div className='mm-overview-container'>
-					<h5 className='mm-overview-label'>Overview</h5>
-					<p className='mm-overview-text'>"{m.overview}"</p>
-				</div>
-			</Fragment>
-		}
-
 		return (
 			<Modal className='movie-modal' isOpen={true}>
 				<div className='mm-close-div'><Ex className='mm-close' onClick={this.props.closeModal}/></div>
 				<h1 className='mm-h1'>{m.title}</h1>
 				{ release_date }
 				{    genres    }
-				{   overview   }
+				<br/>
+				<div className='mm-overview-container'>
+					<h5 className='mm-overview-label'>Overview</h5>
+					<p className='mm-overview-text'>"{m.overview || 'No overview provided.'}"</p>
+				</div>
 				<br/>
 				{ this.showForm() }
 			</Modal>

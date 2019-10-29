@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import ReactLoading from 'react-loading'
+import { MdErrorOutline as Err } from 'react-icons/md'
 import { backend_api } from './constants'
 import Login from './views/Login'
 import Signup from './views/Signup'
@@ -13,7 +14,8 @@ import './stylesheets/App.scss'
 class App extends React.Component {
 
 	state = {
-		loading: true
+		loading: true,
+		connectionError: false
 	}
 
 	componentDidMount() {
@@ -34,6 +36,7 @@ class App extends React.Component {
 		else {
 			fetch(backend_api)
 			.then(() => this.setState({ loading: false }))
+			.catch(() => this.setState({ loading: false, connectionError: true }))
 		}
 	}
 
@@ -41,6 +44,14 @@ class App extends React.Component {
 		<div className="loading">
 			<ReactLoading type="bars" color="#E50A12" height="20%" width="20%" />
 			<div>Waking up Heroku database</div>
+		</div>
+	)
+
+	connectionError = () => (
+		<div className="loading">
+			<Err className='svg-err'/>
+			<div className='err-text'>Connection error</div>
+			<div className='err-text'>Please wait and try again</div>
 		</div>
 	)
 
@@ -67,6 +78,7 @@ class App extends React.Component {
 
 	render() {
 		if (this.state.loading) return this.loading()
+		else if (this.state.connectionError) return this.connectionError()
 		else if (this.props.loggedIn) return this.loggedInRoutes()
 		else return this.loggedOutRoutes()
 	}
