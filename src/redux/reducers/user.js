@@ -31,10 +31,23 @@ export default (state = initialState, action) => {
     }
 
     case 'UPDATE_ENTRY': {
+      const { id } = action.entry
       let entries = copyObj(state[action.entry_type])
-      entries[action.entry.id] = action.entry
+      entries[id] = action.entry
+      let new_state = { ...state, [action.entry_type]: entries }
 
-      return { ...state, [action.entry_type]: entries }
+      if (action.entry_type === 'completed' && state.favorites[id]) {
+        let favorites = copyObj(state.favorites)
+        favorites[id] = action.entry
+        new_state.favorites = favorites
+      }
+      else if (action.entry_type === 'favorites' && state.completed[id]) {
+        let completed = copyObj(state.completed)
+        completed[id] = action.entry
+        new_state.completed = completed
+      }
+
+      return new_state
     }
 
     case 'COMPLETE_ENTRY': {
