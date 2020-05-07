@@ -1,6 +1,5 @@
-// export const backend_api = 'https://flixnet-asallen.herokuapp.com'
-export const backend_api = 'https://flixnet-express-mongodb.herokuapp.com'
-// export const backend_api = 'http://localhost:3000'
+// export const backend_api = 'https://flixnet-express-mongodb.herokuapp.com'
+export const backend_api = 'http://localhost:3000'
 
 export const public_key = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwCUCeDOIxnEl65JkrpOF

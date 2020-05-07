@@ -85,7 +85,8 @@ $gold: #FADF61;
 .mt-poster-img {
 	// maintain aspect ratio 2:3
 	// original = 342x513 px
-	@include media-breakpoint-only(md) { width: 15vw; }
+	width: 15vw;
+	// @include media-breakpoint-only(md) { width: 15vw; }
 	@include media-breakpoint-only(sm) { width: 20vw; }
 	@include media-breakpoint-only(xs) { width: 25vw; }
 }

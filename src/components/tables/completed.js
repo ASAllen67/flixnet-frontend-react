@@ -63,7 +63,7 @@ class CompletedTable extends React.Component {
 			<Table striped className='mt-table table-dark'>
 				<thead>
 					<tr>
-						<th className='mt-index'>#</th>
+						<th className='mt-index'></th>
 						<th>Poster</th>
 						<th>Title</th>
 						<th>Score</th>
